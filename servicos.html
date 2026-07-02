@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serviços | Santa Rosa Centro Odontológico — Dra. Luana Ribas Santa Rosa</title>
+<meta name="description" content="Ortodontia, prótese dentária, facetas, harmonização orofacial e linhas de expressão em Limeira (SP). Agende com a Dra. Luana pelo WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* tokens, reset, shared components */
+:root{
+  --white:      #FFFFFF;
+  --fog:        #F0F7F4;
+  --mint-light: #E3F2EC;
+  --mint:       #A8D5BC;
+  --green:      #4A8C6F;
+  --green-deep: #3A7059;
+  --ink:        #2C2C2C;
+  --gray:       #5E5E5E;
+  --gray-line:  #E0E0E0;
+  --ff-display: 'Cormorant Garamond', serif;
+  --ff-body:    'DM Sans', sans-serif;
+  --ease:       cubic-bezier(.22,.7,.3,1);
+  --shadow:     0 20px 50px -24px rgba(74,140,111,.22);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{font-family:var(--ff-body);background:var(--white);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;}
+button{font:inherit;cursor:pointer;border:none;background:none;}
+h1,h2,h3,h4{font-family:var(--ff-display);font-weight:600;line-height:1.12;}
+section{position:relative;}
+.section-pad{padding:92px 0;}
+.container{width:100%;max-width:1160px;margin:0 auto;padding:0 24px;}
+a:focus-visible,button:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:3px;}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important;}}
+/* type */
+.kicker{font-family:var(--ff-display);font-style:italic;font-size:1.05rem;color:var(--green);display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.kicker::before{content:"";width:28px;height:1px;background:var(--mint);display:inline-block;}
+.title{font-size:clamp(2rem,4vw,3rem);color:var(--ink);max-width:640px;}
+.lede{color:var(--gray);font-size:1rem;max-width:540px;}
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--ff-body);font-weight:600;font-size:0.92rem;padding:15px 30px;border-radius:50px;transition:transform .3s var(--ease),background .3s var(--ease),box-shadow .3s var(--ease),color .3s var(--ease);}
+.btn svg{width:17px;height:17px;flex-shrink:0;}
+.btn-green{background:var(--green);color:var(--white);}
+.btn-green:hover{background:var(--green-deep);transform:translateY(-2px);box-shadow:0 12px 28px -10px rgba(74,140,111,.45);}
+.btn-outline{border:1.5px solid var(--green);color:var(--green);}
+.btn-outline:hover{background:var(--green);color:var(--white);transform:translateY(-2px);}
+.btn-outline-light{border:1.5px solid rgba(255,255,255,.5);color:var(--white);}
+.btn-outline-light:hover{background:rgba(255,255,255,.15);transform:translateY(-2px);}
+/* reveal */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease);}
+.reveal.in-view{opacity:1;transform:translateY(0);}
+.reveal-d1.in-view{transition-delay:.12s;}
+.reveal-d2.in-view{transition-delay:.24s;}
+.reveal-d3.in-view{transition-delay:.36s;}
+/* placeholder photo */
+.placeholder-photo{aspect-ratio:3/4;background:linear-gradient(160deg,var(--mint-light) 0%,var(--fog) 60%,var(--mint) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:24px;}
+.placeholder-photo svg{width:52px;height:52px;color:var(--green);opacity:.6;}
+.placeholder-photo span{font-size:0.74rem;color:var(--green);font-weight:600;letter-spacing:.04em;}
+/* header */
+.site-header{position:fixed;top:0;left:0;right:0;z-index:200;padding:20px 0;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-line);transition:background .4s var(--ease),padding .4s var(--ease),box-shadow .4s var(--ease);}
+.site-header.scrolled{background:rgba(255,255,255,.92);backdrop-filter:blur(14px);padding:13px 0;box-shadow:0 8px 24px -16px rgba(74,140,111,.3);}
+.header-inner{display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:var(--ff-display);font-size:1.35rem;font-weight:600;color:var(--ink);line-height:1;}
+.logo span{display:block;font-family:var(--ff-body);font-size:0.58rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-top:4px;}
+.nav-desktop{display:none;}
+.nav-desktop ul{display:flex;gap:32px;}
+.nav-desktop a{font-size:0.86rem;font-weight:500;color:var(--gray);position:relative;padding-bottom:4px;transition:color .3s var(--ease);}
+.nav-desktop a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--green);transition:width .3s var(--ease);}
+.nav-desktop a:hover{color:var(--ink);}
+.nav-desktop a:hover::after{width:100%;}
+.header-actions{display:flex;align-items:center;gap:12px;}
+.header-cta{display:none;}
+.hamburger{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--gray-line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;}
+.hamburger span{width:16px;height:1.4px;background:var(--ink);transition:transform .3s var(--ease),opacity .3s var(--ease);display:block;}
+.hamburger.open span:nth-child(1){transform:translateY(6.4px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-6.4px) rotate(-45deg);}
+.mobile-nav{position:fixed;inset:0;background:var(--mint-light);z-index:190;display:flex;flex-direction:column;padding:108px 32px 40px;transform:translateY(-100%);opacity:0;pointer-events:none;transition:transform .45s var(--ease),opacity .45s var(--ease);}
+.mobile-nav.open{transform:translateY(0);opacity:1;pointer-events:auto;}
+.mobile-nav ul{display:flex;flex-direction:column;gap:0;}
+.mobile-nav li{border-bottom:1px solid var(--mint);}
+.mobile-nav li a{display:block;font-family:var(--ff-body);font-size:1.2rem;font-weight:600;color:var(--ink);padding:20px 0;letter-spacing:.01em;transition:color .3s;}
+.mobile-nav li a:hover{color:var(--green);}
+.mobile-nav .btn{margin-top:28px;align-self:stretch;text-align:center;justify-content:center;padding:14px 24px;font-size:0.9rem;border-bottom:none;}
+.mobile-nav .btn-green{color:var(--white);}
+body.menu-open{overflow:hidden;}
+/* cta section */
+.cta-section{background:var(--green);text-align:center;}
+.cta-section h2{font-size:clamp(1.9rem,4vw,2.8rem);color:var(--white);margin-bottom:14px;}
+.cta-section p{color:rgba(255,255,255,.8);margin:0 auto 30px;max-width:500px;}
+/* footer */
+.site-footer{background:var(--mint-light);padding:52px 0 22px;}
+.footer-top{display:grid;grid-template-columns:1fr;gap:32px;padding-bottom:32px;border-bottom:1px solid var(--mint);}
+.footer-brand .logo{margin-bottom:8px;}
+.footer-brand p{color:var(--gray);font-size:0.86rem;max-width:260px;margin-top:10px;}
+.footer-col h5{font-size:0.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green);margin-bottom:14px;}
+.footer-col ul{display:flex;flex-direction:column;gap:9px;}
+.footer-col a,.footer-col p{color:var(--gray);font-size:0.88rem;transition:color .3s;}
+.footer-col a:hover{color:var(--ink);}
+.footer-social{display:flex;gap:10px;margin-top:10px;}
+.footer-social a{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--mint);display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s;}
+.footer-social a:hover{background:var(--green);border-color:var(--green);}
+.footer-social a:hover svg{color:var(--white);}
+.footer-social svg{width:15px;height:15px;color:var(--green);transition:color .3s;}
+.footer-bottom{padding-top:22px;display:flex;flex-direction:column;gap:8px;align-items:center;text-align:center;}
+.footer-bottom p{font-size:0.76rem;color:var(--gray);}
+/* wa float */
+.wa-float{position:fixed;right:20px;bottom:20px;z-index:250;width:58px;height:58px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px -10px rgba(74,140,111,.5);animation:wa-pulse 3.2s ease-in-out infinite;}
+.wa-float svg{width:26px;height:26px;color:var(--white);}
+.wa-float:hover{background:var(--green-deep);}
+@keyframes wa-pulse{0%,100%{box-shadow:0 14px 30px -10px rgba(74,140,111,.5),0 0 0 0 rgba(74,140,111,.3);}50%{box-shadow:0 14px 30px -10px rgba(74,140,111,.5),0 0 0 13px rgba(74,140,111,0);}}
+@media(prefers-reduced-motion:reduce){.wa-float{animation:none;}}
+/* responsive shared */
+@media(min-width:768px){.section-pad{padding:120px 0;}.nav-desktop{display:block;}.header-cta{display:inline-flex;}.hamburger{display:none;}.footer-top{grid-template-columns:1.4fr 1fr 1fr;gap:24px;}.footer-bottom{flex-direction:row;justify-content:space-between;text-align:left;}}
+
+
+.services-hero{ background:var(--green); padding:140px 0 70px; text-align:center; }
+.services-hero h1{ font-size:clamp(2.4rem,6vw,4rem); color:var(--white); margin-bottom:14px; }
+.services-hero p{ color:rgba(255,255,255,.8); max-width:520px; margin:0 auto; font-size:1.02rem; }
+.services-section{ background:var(--white); padding:0; }
+
+/* ── Option D: 5 cards horizontal, opens on hover ── */
+.services-strip{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  min-height:500px;
+}
+.svc-card{
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:48px 28px 44px;
+  background:#F4F4F4;
+  border-right:1px solid #E2E2E2;
+  cursor:pointer;
+  transition:background .55s cubic-bezier(.22,.7,.3,1);
+}
+.svc-card:nth-child(2){ background:#F0F0F0; }
+.svc-card:nth-child(3){ background:#F5F5F5; }
+.svc-card:nth-child(4){ background:#EFEFEF; }
+.svc-card:nth-child(5){ background:#F2F2F2; border-right:none; }
+.svc-card:hover{ background:#1B5E3B; }
+
+/* ── icon ring ── */
+.svc-icon-wrap{
+  width:100px; height:100px;
+  border-radius:50%;
+  border:1.5px solid rgba(0,0,0,.12);
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:24px;
+  flex-shrink:0;
+  transition:border-color .55s, transform .55s cubic-bezier(.22,.7,.3,1), background .55s;
+}
+.svc-card:hover .svc-icon-wrap{
+  border-color:rgba(255,255,255,.55);
+  background:rgba(255,255,255,.15);
+  transform:scale(1.08) translateY(-12px);
+}
+.svc-icon-wrap svg{ width:46px; height:46px; color:#5E5E5E; transition:color .55s; }
+.svc-card:hover .svc-icon-wrap svg{ color:#fff; }
+
+/* ── main content (always visible, slides up on hover) ── */
+.svc-main{
+  display:flex; flex-direction:column; align-items:center;
+  transition:transform .55s cubic-bezier(.22,.7,.3,1);
+}
+.svc-card:hover .svc-main{ transform:translateY(-14px); }
+.svc-name{
+  font-family:var(--ff-display);
+  font-size:clamp(1.05rem,1.5vw,1.35rem);
+  font-weight:600;
+  color:#2C2C2C;
+  text-align:center;
+  line-height:1.25;
+  transition:color .55s;
+}
+.svc-card:hover .svc-name{ color:#fff; }
+
+/* ── extra content (hidden, fades in on hover) ── */
+.svc-extra{
+  display:flex; flex-direction:column; align-items:center; gap:18px;
+  margin-top:0; max-height:0; overflow:hidden;
+  opacity:0;
+  transform:translateY(16px);
+  transition:opacity .45s cubic-bezier(.22,.7,.3,1) .1s,
+             transform .45s cubic-bezier(.22,.7,.3,1) .1s,
+             max-height .5s cubic-bezier(.22,.7,.3,1),
+             margin-top .5s;
+}
+.svc-card:hover .svc-extra{
+  opacity:1;
+  transform:translateY(0);
+  max-height:200px;
+  margin-top:22px;
+}
+.svc-desc-text{
+  font-size:0.82rem;
+  color:rgba(255,255,255,.82);
+  line-height:1.6;
+  text-align:center;
+  max-width:190px;
+}
+.svc-btn{
+  display:inline-flex; align-items:center; gap:7px;
+  font-size:0.78rem; font-weight:700;
+  color:#fff;
+  border:1.5px solid rgba(255,255,255,.55);
+  padding:9px 20px; border-radius:50px;
+  transition:background .3s, border-color .3s;
+}
+.svc-btn:hover{ background:rgba(255,255,255,.15); border-color:#fff; }
+.svc-btn svg{ width:13px; height:13px; }
+
+/* ── mobile ── */
+@media(max-width:1023px){
+  .services-strip{ grid-template-columns:repeat(2,1fr); min-height:auto; }
+  .svc-card{ border-right:none; border-bottom:1px solid #2A2A2A; min-height:280px; }
+  .svc-card:nth-child(5){ border-right:none; border-bottom:none; }
+  .svc-card:last-child{ grid-column:1/-1; }
+}
+@media(max-width:479px){
+  .services-strip{ grid-template-columns:1fr; }
+  .svc-card:last-child{ grid-column:auto; }
+  .svc-card{ min-height:240px; }
+}
+}
+@media(max-width:479px){
+  .services-strip{ grid-template-columns:1fr; }
+  .svc-card{ min-height:260px; }
+  .svc-card:last-child{ grid-column:auto; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">Santa Rosa<span>Centro Odontológico</span></a>
+    <nav class="nav-desktop" aria-label="Navegação principal">
+      <ul>
+        <li><a href="santa-rosa-index.html#sobre">Sobre</a></li>
+        <li><a href="santa-rosa-index.html#diferenciais">Diferenciais</a></li>
+        <li><a href="santa-rosa-servicos.html" style="color:var(--green);font-weight:700;">Serviços</a></li>
+        <li><a href="santa-rosa-index.html#contato">Contato</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20consulta%20com%20a%20Dra.%20Luana." target="_blank" rel="noopener" class="btn btn-green header-cta">Agendar pelo WhatsApp</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="santa-rosa-index.html#sobre">Sobre</a></li>
+    <li><a href="santa-rosa-index.html#diferenciais">Diferenciais</a></li>
+    <li><a href="santa-rosa-servicos.html">Serviços</a></li>
+    <li><a href="santa-rosa-index.html#contato">Contato</a></li>
+  </ul>
+  <a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20consulta%20com%20a%20Dra.%20Luana." target="_blank" rel="noopener" class="btn btn-green">Agendar pelo WhatsApp</a>
+</nav>
+
+<!-- HERO STRIP -->
+<section class="services-hero">
+  <div class="container">
+    <span class="kicker" style="justify-content:center;color:rgba(255,255,255,.65);">tratamentos</span>
+    <h1>Cada sorriso tem<br><em>a sua solução.</em></h1>
+    <p>Conheça os tratamentos oferecidos pela Dra. Luana e descubra qual é o ideal para você.</p>
+  </div>
+</section>
+
+<!-- SERVICES STRIP -->
+<section class="services-section">
+  <div class="services-strip">
+    
+    <div class="svc-card  reveal">
+      <div class="svc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M6.5 4C5 4 3.5 5.5 3.5 7.5c0 2 1.5 3.5 2 6 .5 2 .5 4 1.5 4s1-1.5 1.5-1.5.5 1.5 1.5 1.5 1-2 1.5-4c.5-2.5 2-4 2-6 0-2-1.5-3.5-3-3.5s-2 .8-2.5 1.5C8 5 7.5 4 6.5 4z"/><path d="M12.5 4C11 4 9.5 5.5 9.5 7.5c0 2 1.5 3.5 2 6 .5 2 .5 4 1.5 4s1-1.5 1.5-1.5.5 1.5 1.5 1.5 1-2 1.5-4c.5-2.5 2-4 2-6C20.5 5.5 19 4 17.5 4s-2 .8-2.5 1.5C14.5 5 14 4 12.5 4z" opacity=".5"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5" stroke-width="1.1"/></svg></div>
+      <div class="svc-main">
+        <h3 class="svc-name">Ortodontia</h3>
+      </div>
+      <div class="svc-extra">
+        <p class="svc-desc-text">Alinhamento dental preciso e discreto para um sorriso harmônico e funcional.</p>
+        <a class="svc-btn" href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20Ortodontia." target="_blank" rel="noopener">
+          Agendar consulta
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+    
+    <div class="svc-card  reveal">
+      <div class="svc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 10c0-1.5 1-2.5 2-2.5s1.5.8 2 1.5c.5-.7 1-1.5 2-1.5s1.5.8 2 1.5c.5-.7 1-1.5 2-1.5s1.5.8 2 1.5c.5-.7 1-1.5 2-1.5s2 1 2 2.5"/><path d="M4 10c0 2 1 3.5 1.5 5 .5 1.5.5 3 1.5 3s1-1.2 1.5-1.2.5 1.2 1.5 1.2 1-1.5 1.5-3c.5-1.5 1.5-3 1.5-5"/><path d="M12 10c0 2 1 3.5 1.5 5 .5 1.5.5 3 1.5 3s1.5-1.5 1.5-3c.5-1.5 1.5-3 1.5-5"/><line x1="4" y1="10" x2="20" y2="10" stroke-width=".9" stroke-dasharray="1.5,1"/></svg></div>
+      <div class="svc-main">
+        <h3 class="svc-name">Prótese<br>Dentária</h3>
+      </div>
+      <div class="svc-extra">
+        <p class="svc-desc-text">Reabilitação oral com próteses fixas ou removíveis de alta durabilidade e naturalidade.</p>
+        <a class="svc-btn" href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20Pr%C3%B3tese%20Dent%C3%A1ria." target="_blank" rel="noopener">
+          Agendar consulta
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+    
+    <div class="svc-card  reveal">
+      <div class="svc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 2l2.5 7H21l-5.7 4.1 2.2 6.9L12 16l-5.5 4 2.2-6.9L3 9h6.5z"/></svg></div>
+      <div class="svc-main">
+        <h3 class="svc-name">Facetas</h3>
+      </div>
+      <div class="svc-extra">
+        <p class="svc-desc-text">Lâminas de porcelana que transformam cor, forma e tamanho com resultado duradouro.</p>
+        <a class="svc-btn" href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20Facetas%20Dentais." target="_blank" rel="noopener">
+          Agendar consulta
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+    
+    <div class="svc-card  reveal">
+      <div class="svc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="7" r="4"/><path d="M6 21v-1a6 6 0 0 1 12 0v1"/><path d="M15 10.5c.5.8 1 1.5 1 2.5" stroke-width="1" opacity=".6"/><path d="M9 10.5c-.5.8-1 1.5-1 2.5" stroke-width="1" opacity=".6"/><path d="M10 14s.5 1 2 1 2-1 2-1" stroke-width="1.1"/></svg></div>
+      <div class="svc-main">
+        <h3 class="svc-name">Harmonização<br>Orofacial</h3>
+      </div>
+      <div class="svc-extra">
+        <p class="svc-desc-text">Procedimentos minimamente invasivos que equilibram os traços do rosto com naturalidade.</p>
+        <a class="svc-btn" href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20Harmoniza%C3%A7%C3%A3o%20Orofacial." target="_blank" rel="noopener">
+          Agendar consulta
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+    
+    <div class="svc-card  reveal">
+      <div class="svc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M10 3h4v2.5l2 1v9l-2 1H10l-2-1v-9l2-1z"/><line x1="10" y1="8" x2="14" y2="8"/><line x1="10" y1="11" x2="14" y2="11"/><line x1="10" y1="14" x2="14" y2="14"/><path d="M12 3v-1.5" stroke-width="1.2"/><path d="M11 1.5h2" stroke-width="1.1"/></svg></div>
+      <div class="svc-main">
+        <h3 class="svc-name">Linhas de<br>Expressão</h3>
+      </div>
+      <div class="svc-extra">
+        <p class="svc-desc-text">Toxina botulínica para suavizar linhas e rugas com precisão e segurança.</p>
+        <a class="svc-btn" href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20Linhas%20de%20Express%C3%A3o." target="_blank" rel="noopener">
+          Agendar consulta
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="cta-section section-pad" id="contato">
+  <div class="container reveal">
+    <span class="kicker" style="justify-content:center;color:rgba(255,255,255,.7);">agende sua consulta</span>
+    <h2>Não sabe por onde começar?</h2>
+    <p>Agende uma avaliação e a Dra. Luana indica o tratamento ideal para o seu caso.</p>
+    <a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20consulta%20com%20a%20Dra.%20Luana." target="_blank" rel="noopener" class="btn" style="font-size:1rem;padding:17px 38px;background:var(--white);color:var(--green);font-weight:700;"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1.2C5.7.2.5 5.4.5 11.8c0 2.1.6 4.1 1.6 5.9L.4 24l6.5-1.7c1.7.9 3.6 1.4 5.6 1.4 6.4 0 11.6-5.2 11.6-11.6 0-3.1-1.2-6-3.6-8.4ZM12.1 21.5c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.7 9.7 0 0 1-1.5-5.2c0-5.3 4.4-9.7 9.8-9.7 2.6 0 5 1 6.9 2.9a9.6 9.6 0 0 1 2.9 6.9c0 5.4-4.4 9.8-9.7 9.8Z"/></svg> Agendar pelo WhatsApp</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo">Santa Rosa<span>Centro Odontológico</span></span>
+        <p>Odontologia estética e reabilitadora premium em Limeira (SP).</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1.2C5.7.2.5 5.4.5 11.8c0 2.1.6 4.1 1.6 5.9L.4 24l6.5-1.7c1.7.9 3.6 1.4 5.6 1.4 6.4 0 11.6-5.2 11.6-11.6 0-3.1-1.2-6-3.6-8.4Z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Serviços</h5>
+        <ul>
+          <li><a href="santa-rosa-servicos.html">Ortodontia</a></li>
+          <li><a href="santa-rosa-servicos.html">Prótese Dentária</a></li>
+          <li><a href="santa-rosa-servicos.html">Facetas</a></li>
+          <li><a href="santa-rosa-servicos.html">Harmonização Orofacial</a></li>
+          <li><a href="santa-rosa-servicos.html">Linhas de Expressão</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contato</h5>
+        <p>(19) 0000-0000</p>
+        <p>@santarosaodonto</p>
+        <p style="margin-top:8px;">Rua das Flores, 100<br>Centro, Limeira-SP</p>
+        <p style="margin-top:8px;">Seg–Sex: 08h–18h<br>Sáb: 08h–12h</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span class="year"></span> Santa Rosa Centro Odontológico. Todos os direitos reservados.</p>
+      <p>Dra. Luana Ribas Santa Rosa · CRO-SP</p>
+    </div>
+  </div>
+</footer>
+<a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20consulta%20com%20a%20Dra.%20Luana." target="_blank" rel="noopener" class="wa-float" aria-label="Agendar"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1.2C5.7.2.5 5.4.5 11.8c0 2.1.6 4.1 1.6 5.9L.4 24l6.5-1.7c1.7.9 3.6 1.4 5.6 1.4 6.4 0 11.6-5.2 11.6-11.6 0-3.1-1.2-6-3.6-8.4ZM12.1 21.5c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.7 9.7 0 0 1-1.5-5.2c0-5.3 4.4-9.7 9.8-9.7 2.6 0 5 1 6.9 2.9a9.6 9.6 0 0 1 2.9 6.9c0 5.4-4.4 9.8-9.7 9.8Z"/></svg></a>
+<script>
+(function(){
+  document.querySelectorAll('.year').forEach(function(el){ el.textContent = new Date().getFullYear(); });
+  var header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', function(){ header.classList.toggle('scrolled', window.scrollY > 40); }, {passive:true});
+  var hamburger = document.getElementById('hamburgerBtn');
+  var mobileNav = document.getElementById('mobileNav');
+  function closeMenu(){ hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); mobileNav.classList.remove('open'); document.body.classList.remove('menu-open'); }
+  hamburger.addEventListener('click', function(){
+    var isOpen = mobileNav.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    document.body.classList.toggle('menu-open', isOpen);
+  });
+  mobileNav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+  var reveals = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); } }); }, {threshold:0.13, rootMargin:'0px 0px -40px 0px'});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else { reveals.forEach(function(el){ el.classList.add('in-view'); }); }
+})();
+</script>
+</body>
+</html>
